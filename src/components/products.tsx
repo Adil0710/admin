@@ -694,18 +694,19 @@ export default function ProductsPage({
                               </TableCell>
                               <TableCell>
                                 <div className="flex items-center">
-                                  <div className="w-10 h-10 mr-3 bg-[#f3f3f3] rounded overflow-hidden">
+                                    <div className="w-10 h-10 mr-3 bg-[#f3f3f3] rounded overflow-hidden flex items-center justify-center">
                                     <Image
                                       src={
-                                        product.images[0] ||
-                                        "/placeholder.svg?height=40&width=40" ||
-                                        "/placeholder.svg"
+                                      product.images[0] ||
+                                      "/placeholder.svg?height=40&width=40" ||
+                                      "/placeholder.svg"
                                       }
                                       alt={product.name}
-                                      width={35}
-                                      height={35}
+                                      width={40}
+                                      height={40}
+                                      style={{ objectFit: "cover" }}
                                     />
-                                  </div>
+                                    </div>
                                   <span className=" text-sm capitalize">
                                     {product.name}
                                   </span>

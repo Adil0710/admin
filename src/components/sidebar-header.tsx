@@ -11,11 +11,11 @@ export function SiteHeader() {
   const pathname = usePathname();
 
 
-  const pathSegments = pathname.split("/").filter(Boolean); 
-  const pageTitle =
-    pathSegments.length > 1
-      ? pathSegments[pathSegments.length - 1]
-      : "Dashboard";
+  // const pathSegments = pathname.split("/").filter(Boolean); 
+  // const pageTitle =
+  //   pathSegments.length > 1
+  //     ? pathSegments[pathSegments.length - 1]
+  //     : "Dashboard";
 
 
   // const formattedTitle = pageTitle.charAt(0).toUpperCase() + pageTitle.slice(1);
