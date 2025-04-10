@@ -2,13 +2,13 @@
 
 import { SidebarTrigger } from "../components/ui/sidebar";
 import { Bell, Mail } from "lucide-react";
-import { usePathname } from "next/navigation";
+// import { usePathname } from "next/navigation";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 export function SiteHeader() {
-  const pathname = usePathname();
+  // const pathname = usePathname();
 
 
   // const pathSegments = pathname.split("/").filter(Boolean); 
