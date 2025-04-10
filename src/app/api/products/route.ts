@@ -6,7 +6,6 @@ export async function GET(request: NextRequest) {
   try {
     await dbConnect();
 
-
     const searchParams = request.nextUrl.searchParams;
     const page = parseInt(searchParams.get("page") || "1");
     const limit = parseInt(searchParams.get("limit") || "50");
@@ -18,14 +17,12 @@ export async function GET(request: NextRequest) {
     const categories = searchParams.get("categories") || "";
     const sortOrder = searchParams.get("sortOrder") || "newest";
 
-
-    let query: any = {};
-
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const query: any = {};
 
     if (search) {
       query.name = { $regex: search, $options: "i" };
     }
-
 
     if (minPrice && !isNaN(parseFloat(minPrice))) {
       query.price = { ...query.price, $gte: parseFloat(minPrice) };
@@ -34,7 +31,6 @@ export async function GET(request: NextRequest) {
     if (maxPrice && !isNaN(parseFloat(maxPrice))) {
       query.price = { ...query.price, $lte: parseFloat(maxPrice) };
     }
-
 
     if (startDate) {
       const start = new Date(startDate);
@@ -48,16 +44,14 @@ export async function GET(request: NextRequest) {
       query.createdAt = { ...query.createdAt, $lte: end };
     }
 
-
     if (categories) {
       const categoryList = categories.split(",");
       if (categoryList.length > 0) {
         query.category = { $in: categoryList };
       }
     }
-
-
-    let sort: any = { createdAt: -1 }; 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let sort: any = { createdAt: -1 };
 
     if (sortOrder === "oldest") {
       sort = { createdAt: 1 };
@@ -67,9 +61,7 @@ export async function GET(request: NextRequest) {
       sort = { price: -1 };
     }
 
-
     const total = await ProductModel.countDocuments(query);
-
 
     const products = await ProductModel.find(query)
       .sort(sort)

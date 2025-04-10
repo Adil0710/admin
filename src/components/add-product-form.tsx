@@ -40,13 +40,13 @@ const ACCEPTED_IMAGE_TYPES = [
 ];
 
 
-const categories = [
-  { id: "sneakers", name: "Sneakers" },
-  { id: "running", name: "Running" },
-  { id: "casual", name: "Casual" },
-  { id: "sports", name: "Sports" },
-  { id: "limited", name: "Limited Edition" },
-];
+// const categories = [
+//   { id: "sneakers", name: "Sneakers" },
+//   { id: "running", name: "Running" },
+//   { id: "casual", name: "Casual" },
+//   { id: "sports", name: "Sports" },
+//   { id: "limited", name: "Limited Edition" },
+// ];
 
 export default function AddProductForm({
   onSwitchToProducts,

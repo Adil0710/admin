@@ -14,6 +14,7 @@ async function uploadToCloudinary(
   fileBuffer: Buffer,
   folder: string,
   publicId: string,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   transformations: Record<string, any> = {}
 ) {
   return new Promise((resolve, reject) => {
@@ -86,14 +87,13 @@ export async function POST(request: NextRequest) {
       const publicId = `product-${Date.now()}-${i}`;
 
       try {
-        // @ts-ignore - Cloudinary types are not perfect
         const uploadResult = await uploadToCloudinary(
           fileBuffer,
           "products",
           publicId
         );
 
-        // @ts-ignore - Cloudinary types are not perfect
+        // @ts-expect-error - Cloudinary types are not perfect
         imageUrls.push(uploadResult.secure_url);
       } catch (error) {
         console.error("Error uploading image to Cloudinary:", error);

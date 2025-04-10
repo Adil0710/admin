@@ -170,7 +170,6 @@ export default function ProductsPage({
     }
   };
 
-
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return {
@@ -400,6 +399,7 @@ export default function ProductsPage({
                         <AccordionContent>
                           <RadioGroup
                             value={filters.sortOrder}
+                            // eslint-disable-next-line @typescript-eslint/no-explicit-any
                             onValueChange={(value: any) => setSortOrder(value)}
                           >
                             <div className="flex items-center space-x-2">

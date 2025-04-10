@@ -18,7 +18,7 @@ export function SiteHeader() {
       : "Dashboard";
 
 
-  const formattedTitle = pageTitle.charAt(0).toUpperCase() + pageTitle.slice(1);
+  // const formattedTitle = pageTitle.charAt(0).toUpperCase() + pageTitle.slice(1);
 
   return (
     <div className="flex-1 flex flex-col">
