@@ -122,8 +122,6 @@ const useProductStore = create<ProductState>((set, get) => ({
         },
       });
 
-      const data = response.data;
-
       await get().fetchProducts();
 
       set({ isLoading: false });
@@ -150,7 +148,6 @@ const useProductStore = create<ProductState>((set, get) => ({
 
     try {
       const response = await axios.delete(`/api/products/delete-product/${id}`);
-      const data = response.data;
 
       await get().fetchProducts();
 

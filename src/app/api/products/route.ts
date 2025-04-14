@@ -18,6 +18,7 @@ export async function POST(request: Request) {
       itemsPerPage = 10,
     } = body;
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const query: any = {};
 
     if (searchQuery) {
