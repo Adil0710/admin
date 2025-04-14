@@ -111,9 +111,6 @@ export default function ProductsPage({
     setSortOrder,
     resetFilters,
     setCurrentPage,
-
-    getFilteredProducts,
-    getCurrentPageProducts,
   } = useProductStore();
 
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 100]);
@@ -122,10 +119,21 @@ export default function ProductsPage({
 
   useEffect(() => {
     fetchProducts();
-  }, [fetchProducts]);
+  }, [
+    filters.searchQuery,
+    filters.startDate,
+    filters.endDate,
+    filters.minPrice,
+    filters.maxPrice,
+    filters.selectedCategories,
+    filters.sortOrder,
+    pagination.currentPage,
+    pagination.itemsPerPage,
+    fetchProducts,
+  ]);
 
-  const currentProducts = getCurrentPageProducts();
-  const filteredProducts = getFilteredProducts();
+  const currentProducts = useProductStore().products;
+
 
   useEffect(() => {
     if (priceRange[0] > 0) {
@@ -399,7 +407,6 @@ export default function ProductsPage({
                         <AccordionContent>
                           <RadioGroup
                             value={filters.sortOrder}
-                            // eslint-disable-next-line @typescript-eslint/no-explicit-any
                             onValueChange={(value: any) => setSortOrder(value)}
                           >
                             <div className="flex items-center space-x-2">
@@ -694,19 +701,19 @@ export default function ProductsPage({
                               </TableCell>
                               <TableCell>
                                 <div className="flex items-center">
-                                    <div className="w-10 h-10 mr-3 bg-[#f3f3f3] rounded overflow-hidden flex items-center justify-center">
+                                  <div className="w-10 h-10 mr-3 bg-[#f3f3f3] rounded overflow-hidden">
                                     <Image
                                       src={
-                                      product.images[0] ||
-                                      "/placeholder.svg?height=40&width=40" ||
-                                      "/placeholder.svg"
+                                        product.images[0] ||
+                                        "/placeholder.svg?height=40&width=40" ||
+                                        "/placeholder.svg" ||
+                                        "/placeholder.svg"
                                       }
                                       alt={product.name}
-                                      width={40}
-                                      height={40}
-                                      style={{ objectFit: "cover" }}
+                                      width={35}
+                                      height={35}
                                     />
-                                    </div>
+                                  </div>
                                   <span className=" text-sm capitalize">
                                     {product.name}
                                   </span>
@@ -770,15 +777,15 @@ export default function ProductsPage({
             </>
           )}
 
-          {!isLoading && !error && filteredProducts.length > 0 && (
+          {!isLoading && !error && pagination.totalItems > 0 && (
             <div className="mt-4 flex md:flex-row flex-col md:gap-0 gap-5 items-center justify-between text-sm">
               <div className="text-muted-foreground">
                 {(pagination.currentPage - 1) * pagination.itemsPerPage + 1} -{" "}
                 {Math.min(
                   pagination.currentPage * pagination.itemsPerPage,
-                  filteredProducts.length
+                  pagination.totalItems
                 )}{" "}
-                of {filteredProducts.length} items
+                of {pagination.totalItems} items
               </div>
               <div className="flex items-center">
                 <span className="mr-2 text-muted-foreground w-full">
